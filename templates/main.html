@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WordCloud</title>
+    <style>
+        table, th, td {
+          border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+<form>
+    <p><strong>Ведите ссылку на вк сообщество</strong></p>
+    <p><input id="requested_url" maxlength="100" size="40" value="https://vk.com/club42565717"></p>
+</form>
+<button id="submit_button">SUBMIT</button>
+<p>last submission: {{ request }}</p>
+<img src="{{ image }}">
+<table>
+    <thead>
+        <tr>
+        {% for item in posts_data %}
+            {% if forloop.first %}
+                {% for h in item %}
+                    <th>{{ h }}</th>
+                {% endfor %}
+            {% endif%}
+        {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in posts_data %}
+            <tr>
+                {% for key,value in item.items %}
+                    <td>{{ value }}</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</body>
+<script>
+let button = document.querySelector('#submit_button'),
+    input = document.querySelector('#requested_url');
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+button.addEventListener('click', async function (e) {
+    let wall_url = input.value.split('/')
+    await fetch('{% url 'vk_parses:api:parser' wall_url=1234 %}'.replace(1234, wall_url[wall_url.length - 1]),{
+          method: 'GET'
+        }
+    )
+    await sleep(200)
+    window.location.href = window.location.href;
+})
+</script>
+</html>

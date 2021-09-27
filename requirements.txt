@@ -1,0 +1,4 @@
+Django~=3.2.7
+djangorestframework~=3.12.4
+wordcloud~=1.8.1
+vk-api==11.9.4
