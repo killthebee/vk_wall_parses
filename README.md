@@ -19,4 +19,6 @@ docker-compose exec web python manage.py test
 ```
 Перейти в `http://127.0.0.1:8000/` 
 
-
+<p align="center">
+  <img src="https://github.com/killthebee/vk_wall_parses/blob/master/pic/Screenshot%20from%202021-09-27%2000-59-03.png"/>
+</p>
